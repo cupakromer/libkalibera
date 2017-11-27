@@ -1,6 +1,4 @@
-require "test/unit"
-
-require "kalibera"
+require "test_helper"
 
 # We need to match Python's random numbers when testing
 
@@ -29,7 +27,7 @@ class TestData < Kalibera::Data
 
 end
 
-class TestKaliberaData < Test::Unit::TestCase
+class TestKaliberaData < Minitest::Test
 
   def test_indicies
     d = TestData.new({
@@ -53,20 +51,20 @@ class TestKaliberaData < Test::Unit::TestCase
     assert_equal 1, d.r(3)
 
     # indexs are one based, so 0 or less is invalid
-    assert_raise RuntimeError do
+    assert_raises RuntimeError do
       d.r(0)
     end
 
-    assert_raise RuntimeError do
+    assert_raises RuntimeError do
       d.r(-1337)
     end
 
     # Since we have 3 levels here, levels 4 and above are bogus
-    assert_raise RuntimeError do
+    assert_raises RuntimeError do
       d.r(4)
     end
 
-    assert_raise RuntimeError do
+    assert_raises RuntimeError do
       d.r(666)
     end
   end
